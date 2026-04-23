@@ -476,7 +476,10 @@
 
       const card = createElement("div", { className: "timeline-card" },
         createElement("div", { className: "timeline-phase", textContent: item.phase }),
-        createElement("div", { className: "timeline-timeframe", textContent: item.timeframe }),
+        createElement("div", { className: "timeline-timeframe" },
+          createElement("span", { className: "timeframe-icon", "aria-hidden": "true", textContent: "🕐" }),
+          document.createTextNode(item.timeframe)
+        ),
         createElement("div", { className: "timeline-desc", textContent: item.description })
       );
 
@@ -505,7 +508,10 @@
 
       const body = createElement("div", { className: "step-body" },
         createElement("p", { className: "step-description", textContent: step.description }),
-        createElement("div", { className: "tips-label", textContent: "Tips" }),
+        createElement("div", { className: "tips-label" },
+          createElement("span", { className: "tips-icon", "aria-hidden": "true", textContent: "💡" }),
+          document.createTextNode(" Tips")
+        ),
         tipsList
       );
 
@@ -555,13 +561,22 @@
     container.appendChild(intro);
   }
 
+  function shuffleArray(arr) {
+    const result = [...arr];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
   function startQuiz() {
     quizState = {
       active: true,
       currentIndex: 0,
       score: 0,
       answered: false,
-      questions: [...quizQuestions].sort(() => Math.random() - 0.5).slice(0, 10),
+      questions: shuffleArray(quizQuestions).slice(0, 10),
     };
     renderQuestion();
   }
@@ -574,7 +589,7 @@
     const { questions, currentIndex } = quizState;
     const total = questions.length;
     const q = questions[currentIndex];
-    const progress = ((currentIndex) / total) * 100;
+    const progress = (currentIndex / total) * 100;
 
     const progressBar = createElement("div", { className: "quiz-progress-bar" },
       createElement("div", {

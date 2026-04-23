@@ -675,9 +675,9 @@ ol {
   gap: 0.3rem;
 }
 
-.timeline-timeframe::before {
-  content: "🕐";
+.timeline-timeframe .timeframe-icon {
   font-size: 0.7rem;
+  flex-shrink: 0;
 }
 
 .timeline-desc {
@@ -818,8 +818,8 @@ ol {
   gap: 0.3rem;
 }
 
-.tips-label::before {
-  content: "💡";
+.tips-label .tips-icon {
+  flex-shrink: 0;
 }
 
 .tips-list {
