@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,10 +7,15 @@
       name="description"
       content="An interactive assistant that helps you understand the U.S. election process, timelines, and voting steps."
     />
+    <meta name="theme-color" content="#2563eb" id="theme-color-meta" />
     <title>Election Process Education</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
   </head>
   <body>
+    <!-- Skip navigation for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="app-container">
 
       <!-- ===== HEADER ===== -->
@@ -22,7 +27,19 @@
             <div class="header-subtitle">Your guide to understanding U.S. elections</div>
           </div>
         </div>
-        <span class="header-badge">Nonpartisan &amp; Educational</span>
+        <div class="header-actions">
+          <span class="header-badge">Nonpartisan &amp; Educational</span>
+          <button
+            id="theme-toggle"
+            class="theme-toggle-btn"
+            aria-label="Toggle dark mode"
+            title="Toggle dark/light mode"
+            type="button"
+          >
+            <span class="theme-icon-light" aria-hidden="true">☀️</span>
+            <span class="theme-icon-dark" aria-hidden="true">🌙</span>
+          </button>
+        </div>
       </header>
 
       <!-- ===== NAVIGATION TABS ===== -->
@@ -80,7 +97,7 @@
       </nav>
 
       <!-- ===== MAIN CONTENT ===== -->
-      <main class="main-content">
+      <main class="main-content" id="main-content">
 
         <!-- ===== CHAT TAB ===== -->
         <div id="panel-chat" class="tab-panel active" role="tabpanel" aria-label="Ask a Question">
@@ -148,6 +165,17 @@
 
             <!-- Chat Area -->
             <div class="chat-area">
+              <div class="chat-area-toolbar">
+                <button
+                  id="clear-chat-btn"
+                  class="clear-chat-btn"
+                  type="button"
+                  aria-label="Clear chat history"
+                  title="Clear conversation"
+                >
+                  🗑️ Clear chat
+                </button>
+              </div>
               <div
                 id="chat-messages"
                 class="chat-messages"
@@ -164,16 +192,21 @@
                     placeholder="Ask about elections, voting, registration…"
                     aria-label="Type your question about elections"
                     rows="1"
+                    maxlength="500"
                   ></textarea>
                   <button
                     type="submit"
                     class="send-btn"
                     aria-label="Send message"
-                    title="Send"
+                    title="Send (Enter)"
                   >
                     &#10148;
                   </button>
                 </form>
+                <div class="input-meta">
+                  <span class="keyboard-hint" aria-hidden="true">Press <kbd>/</kbd> to focus</span>
+                  <span id="char-count" class="char-count" aria-live="polite" aria-label="Character count"></span>
+                </div>
               </div>
             </div>
 
@@ -277,6 +310,14 @@
       </footer>
 
     </div>
+
+    <!-- Toast notification container -->
+    <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Scroll-to-top button -->
+    <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Back to top" type="button" hidden>
+      ↑
+    </button>
 
     <script src="data.js"></script>
     <script src="script.js"></script>
