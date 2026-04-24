@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive assistant that helps you understand the U.S. election process, timelines, and voting steps."
+    />
+    <meta name="theme-color" content="#2563eb" id="theme-color-meta" />
+    <title>Election Process Education</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- Skip navigation for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="app-container">
+
+      <!-- ===== HEADER ===== -->
+      <header class="app-header">
+        <div class="header-brand">
+          <span class="header-icon" aria-hidden="true">🗳️</span>
+          <div>
+            <div class="header-title">Election Process Education</div>
+            <div class="header-subtitle">Your guide to understanding U.S. elections</div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="header-badge">Nonpartisan &amp; Educational</span>
+          <button
+            id="theme-toggle"
+            class="theme-toggle-btn"
+            aria-label="Toggle dark mode"
+            title="Toggle dark/light mode"
+            type="button"
+          >
+            <span class="theme-icon-light" aria-hidden="true">☀️</span>
+            <span class="theme-icon-dark" aria-hidden="true">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ===== NAVIGATION TABS ===== -->
+      <nav class="nav-tabs" role="tablist" aria-label="Main navigation">
+        <button
+          class="nav-tab active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-chat"
+          data-tab="chat"
+        >
+          <span class="tab-icon" aria-hidden="true">💬</span>
+          <span class="tab-label">Ask a Question</span>
+        </button>
+        <button
+          class="nav-tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-timeline"
+          data-tab="timeline"
+        >
+          <span class="tab-icon" aria-hidden="true">📅</span>
+          <span class="tab-label">Timeline</span>
+        </button>
+        <button
+          class="nav-tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-guide"
+          data-tab="guide"
+        >
+          <span class="tab-icon" aria-hidden="true">📋</span>
+          <span class="tab-label">Voting Guide</span>
+        </button>
+        <button
+          class="nav-tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-quiz"
+          data-tab="quiz"
+        >
+          <span class="tab-icon" aria-hidden="true">🧠</span>
+          <span class="tab-label">Quiz</span>
+        </button>
+        <button
+          class="nav-tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-resources"
+          data-tab="resources"
+        >
+          <span class="tab-icon" aria-hidden="true">🔗</span>
+          <span class="tab-label">Resources</span>
+        </button>
+      </nav>
+
+      <!-- ===== MAIN CONTENT ===== -->
+      <main class="main-content" id="main-content">
+
+        <!-- ===== CHAT TAB ===== -->
+        <div id="panel-chat" class="tab-panel active" role="tabpanel" aria-label="Ask a Question">
+          <div class="chat-layout">
+
+            <!-- Sidebar: Quick Topics -->
+            <aside class="chat-sidebar" aria-label="Quick topics">
+              <div class="sidebar-header">Quick Topics</div>
+              <div class="topic-list" id="topic-list">
+                <button class="topic-btn" data-query="who can vote">Who Can Vote?</button>
+                <button class="topic-btn" data-query="how do i register to vote">How to Register</button>
+                <button class="topic-btn" data-query="what happens on election day">Election Day</button>
+                <button class="topic-btn" data-query="what is early voting">Early Voting</button>
+                <button class="topic-btn" data-query="what is vote by mail">Vote by Mail</button>
+                <button class="topic-btn" data-query="how does the electoral college work">Electoral College</button>
+                <button class="topic-btn" data-query="what is a primary election">Primary Elections</button>
+                <button class="topic-btn" data-query="what is a ballot measure">Ballot Measures</button>
+                <button class="topic-btn" data-query="what are my voting rights">Voting Rights</button>
+                <button class="topic-btn" data-query="how are elections secured">Election Security</button>
+                <button class="topic-btn" data-query="what are the types of elections">Types of Elections</button>
+                <button class="topic-btn" data-query="how are congressional districts drawn">Redistricting</button>
+              </div>
+
+              <hr class="sidebar-divider" />
+              <div class="sidebar-header">Useful Links</div>
+              <div class="sidebar-resources">
+                <a
+                  class="resource-link"
+                  href="https://vote.gov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="vote.gov - official voting portal (opens in new tab)"
+                >
+                  🗳️ vote.gov
+                </a>
+                <a
+                  class="resource-link"
+                  href="https://ballotpedia.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Ballotpedia - nonpartisan election encyclopedia (opens in new tab)"
+                >
+                  📋 Ballotpedia
+                </a>
+                <a
+                  class="resource-link"
+                  href="https://www.lwv.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="League of Women Voters (opens in new tab)"
+                >
+                  👥 League of Women Voters
+                </a>
+                <a
+                  class="resource-link"
+                  href="https://866ourvote.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Election Protection Hotline (opens in new tab)"
+                >
+                  ⚖️ Election Protection
+                </a>
+              </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+              <div class="chat-area-toolbar">
+                <div class="toolbar-actions">
+                  <button
+                    id="topics-toggle-btn"
+                    class="topics-toggle-btn"
+                    type="button"
+                    aria-label="Toggle quick topics"
+                    title="Toggle quick topics"
+                  >
+                    ☰ Topics
+                  </button>
+                  <button
+                    id="clear-chat-btn"
+                    class="clear-chat-btn"
+                    type="button"
+                    aria-label="Clear chat history"
+                    title="Clear conversation"
+                  >
+                    🗑️ Clear chat
+                  </button>
+                </div>
+              </div>
+              <div
+                id="chat-messages"
+                class="chat-messages"
+                role="log"
+                aria-live="polite"
+                aria-label="Conversation"
+              ></div>
+
+              <div class="chat-input-area">
+                <form id="chat-form" class="chat-input-form" autocomplete="off">
+                  <textarea
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="Ask about elections, voting, registration…"
+                    aria-label="Type your question about elections"
+                    rows="1"
+                    maxlength="500"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="send-btn"
+                    aria-label="Send message"
+                    title="Send (Enter)"
+                  >
+                    &#10148;
+                  </button>
+                </form>
+                <div class="input-meta">
+                  <span class="keyboard-hint" aria-hidden="true">Press <kbd>/</kbd> to focus</span>
+                  <span id="char-count" class="char-count" aria-live="polite" aria-label="Character count"></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== TIMELINE TAB ===== -->
+        <div id="panel-timeline" class="tab-panel" role="tabpanel" aria-label="Election Timeline">
+          <div class="timeline-panel">
+            <div class="panel-header">
+              <h1 class="panel-title">📅 Election Timeline</h1>
+              <p class="panel-subtitle">See the key phases and milestones of the election process</p>
+            </div>
+
+            <div class="timeline-selector" role="group" aria-label="Select election type">
+              <button
+                class="timeline-type-btn active"
+                data-type="presidential"
+                aria-pressed="true"
+              >
+                🇺🇸 Presidential
+              </button>
+              <button
+                class="timeline-type-btn"
+                data-type="congressional"
+                aria-pressed="false"
+              >
+                🏛️ Congressional
+              </button>
+              <button
+                class="timeline-type-btn"
+                data-type="local"
+                aria-pressed="false"
+              >
+                🏙️ Local
+              </button>
+            </div>
+
+            <div
+              id="timeline-container"
+              class="timeline-container"
+              aria-label="Election timeline"
+            ></div>
+          </div>
+        </div>
+
+        <!-- ===== VOTING GUIDE TAB ===== -->
+        <div id="panel-guide" class="tab-panel" role="tabpanel" aria-label="Step-by-Step Voting Guide">
+          <div class="guide-panel">
+            <div class="panel-header">
+              <h1 class="panel-title">📋 Step-by-Step Voting Guide</h1>
+              <p class="panel-subtitle">
+                Everything you need to know to cast your vote — from eligibility to Election Day
+              </p>
+            </div>
+
+            <div id="guide-steps" class="steps-container" aria-label="Voting steps"></div>
+
+            <div class="info-callout" role="note">
+              <strong>Note:</strong> Voting rules vary by state. Always verify the specific requirements
+              in your state at
+              <a href="https://vote.gov" target="_blank" rel="noopener noreferrer">vote.gov</a>.
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== QUIZ TAB ===== -->
+        <div id="panel-quiz" class="tab-panel" role="tabpanel" aria-label="Election Knowledge Quiz">
+          <div class="quiz-panel">
+            <div id="quiz-container" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <!-- ===== RESOURCES TAB ===== -->
+        <div id="panel-resources" class="tab-panel" role="tabpanel" aria-label="Voting Resources">
+          <div class="resources-panel">
+            <div class="panel-header">
+              <h1 class="panel-title">🔗 Voting Resources</h1>
+              <p class="panel-subtitle">Trusted nonpartisan sources to help you participate in democracy</p>
+            </div>
+
+            <div id="resources-grid" class="resources-grid" aria-label="Voting resources"></div>
+
+            <div class="info-callout" role="note">
+              <strong>Need help at the polls?</strong> Call the nonpartisan Election Protection Hotline:
+              <strong>1-866-OUR-VOTE (1-866-687-8683)</strong>. Available in multiple languages.
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ===== FOOTER ===== -->
+      <footer class="app-footer">
+        <p>
+          Election Process Education &mdash; Nonpartisan &amp; Educational &bull;
+          Information current as of 2024 &bull;
+          Always verify details at
+          <a href="https://vote.gov" target="_blank" rel="noopener noreferrer">vote.gov</a>
+        </p>
+      </footer>
+
+    </div>
+
+    <!-- Toast notification container -->
+    <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Scroll-to-top button -->
+    <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Back to top" type="button" hidden>
+      ↑
+    </button>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
